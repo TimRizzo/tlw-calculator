@@ -1,0 +1,349 @@
+<html>
+<head>
+<title>thelittlewaves Calculator</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=1.0, initial-scale=1.0" />
+<meta name="description" content="A calculator with thelittlewaves visual theme">
+<meta name="keywords" content="calculator">
+<style>
+
+@import url(https://fonts.googleapis.com/css?family=Raleway:400,200);
+
+body {
+  height: 100%;
+  overflow: auto;
+  margin: 0;
+  background: url('http://www.thelittlewaves.com/pomodoro/background.png') no-repeat center center fixed;
+  background-color: #222;
+  -webkit-overflow-scrolling: touch;
+  opacity: .6;
+}
+
+#wrapper {
+	margin: 0;
+  	width: 100%;
+}
+
+.content {  	
+  	margin: 0 auto;
+  	padding: 10px;
+  	font-size: 20px;  	
+  	font-weight: 400;
+  	font-family: 'Raleway', Verdana, sans-serif;
+  	color: #222;
+}
+
+#calc-body {
+	  margin: 0 auto;
+	  max-width: 400px;
+	  height: 400px;	
+    background: #5c5c8a;
+	  display: block;
+	  position: relative;
+  	border: 5px solid #7575a3;  	
+  	-moz-border-radius: 15px;
+  	-webkit-border-radius: 15px;
+  	border-radius: 15px;
+}
+
+#calc-head {	
+	display: block;
+	text-align: center;	
+  color: #DDD;
+  font-weight: 700;
+	font-size: 20px;
+	margin: 5px;	
+}
+
+#display {	
+	display: block;
+	background: #b3d9ff;
+	text-align: right;
+	opacity: .7;
+	margin: 5px;
+	padding: 5px;
+  	-moz-border-radius: 5px;
+  	-webkit-border-radius: 5px;
+	border-radius: 5px;
+}
+
+#calc-keypad {	
+	margin: 5px;
+	padding: 5px;
+	display: block;
+	background: #CCC;	
+	font-size: 30px;	
+  	-moz-border-radius: 5px;
+  	-webkit-border-radius: 5px;
+  	border-radius: 5px;
+}
+
+#calc-row {
+	width: 100%;	
+	display: block;
+}
+
+
+.keyname {
+	width: 18%;
+	margin: 5px;
+	padding: 5px;
+	display: inline-block;
+	text-align: center;
+	color: #BBB;
+	background: #264c73;
+	-moz-border-radius: 15px;
+  -webkit-border-radius: 15px;
+  border-radius: 15px;
+  box-shadow: 2px 2px 2px #3399ff, 3px 3px 4px #000;
+	opacity: .7;
+}
+
+.keyname:hover {
+  background: #666c73;
+}
+
+.keyname:active {
+  background: #666c73;
+  box-shadow: 2px 2px 2px #333;
+}
+
+
+@media only screen and (min-width: 720px) and (max-width: 1039px) {
+
+}
+
+@media only screen and (max-width: 719px) { 
+  #calc-body {	 
+  max-width: 300px;
+  height: 300px;
+  }
+  
+  #calc-keypad {	
+  	font-size: 20px;
+  	padding: 3px;
+  	margin: 3px;
+  }
+
+  .keyname {
+    width: 16%;    
+  }
+}
+
+</style>
+</head>
+<body>
+<div id="wrapper">
+	<div class="content">
+		<div id="calc-body">
+			<div id="calc-head">thelittlewaves Calculator</div>
+			<div id="display">0</div>
+			<div id="calc-keypad">
+				<div id="calc-row">
+					<div class="keyname" id="clear">C</div>
+					<div class="keyname" id="memSave">M</div>
+					<div class="keyname" id="memClear">MC</div>
+					<div class="keyname" id="memRecall">MR</div>
+				</div>	
+				<div id="calc-row">
+					<div class="keyname" id="1">1</div>
+					<div class="keyname" id="2">2</div>
+					<div class="keyname" id="3">3</div>
+					<div class="keyname" id="add">+</div>
+				</div>
+				<div id="calc-row">
+					<div class="keyname" id="4">4</div>
+					<div class="keyname" id="5">5</div>
+					<div class="keyname" id="6">6</div>
+					<div class="keyname" id="subtract">-</div>
+				</div>
+				<div id="calc-row">
+					<div class="keyname" id="7">7</div>
+					<div class="keyname" id="8">8</div>
+					<div class="keyname" id="9">9</div>
+					<div class="keyname" id="multiply">*</div>
+				</div>
+				<div id="calc-row">
+					<div class="keyname" id="0">0</div>
+					<div class="keyname" id="decimal">.</div>
+					<div class="keyname" id="eval">=</div>
+					<div class="keyname" id="divide">/</div>
+				</div>				
+			</div>
+		</div>
+	</div>
+</div>
+<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+<script>
+// thelittlewaves Calculator
+// operator 1(+), 2(-), 3(*), 4(/), 5(.)
+
+var total = 0,
+		operator = 0,
+    operandA = 0,
+    operandB = 0,
+    memory = 0,
+    decimal = false;
+
+var calculate = function() {
+	if (operator === 1) {
+		total = operandA + operandB; 
+    document.getElementById("display").innerHTML = total;
+    operandA = total;		
+  } else if (operator === 2) {
+  	total = operandA - operandB;
+    document.getElementById("display").innerHTML = total;
+    operandA = total;		
+  } else if (operator === 3) {
+  	total = operandA * operandB;
+    document.getElementById("display").innerHTML = total;
+    operandA = total;		
+  } else if (operator === 4) {
+  	total = operandA / operandB;
+    if (isNaN(total)) {
+    	document.getElementById("display").innerHTML = "C'mon, now";    
+    total = 0;    
+    } else {
+    document.getElementById("display").innerHTML = total;
+    operandA = total;		
+    }
+  }
+  operandB = 0;
+  decimal = false;
+};
+
+var updateDisplay = function(val) {		
+  if (operator > 0) {
+  	if (decimal) {
+    	operandB = operandB + val / 10;
+    } else {
+    operandB = operandB * 10 + val;	    
+    }
+  document.getElementById("display").innerHTML = operandB;
+  } else {
+  	if (decimal) {    
+    	operandA = operandA + val / 10;
+    } else {
+    operandA = operandA * 10 + val;	    
+    }
+  document.getElementById("display").innerHTML = operandA;
+  }  
+};
+
+$("#clear").click(function() {
+	total = 0;
+  operandA = 0;
+  operandB = 0;
+  operator = 0;
+  decimal = false;
+  document.getElementById("display").innerHTML = total; 
+});
+
+$("#memSave").click(function() {
+	if (total > 0) {  
+    memory = total;	    
+    document.getElementById("display").innerHTML = total;
+  } else {
+  	document.getElementById("display").innerHTML = "C'mon now ";
+  }
+	total = 0;
+  operandA = 0;
+  operandB = 0;
+  operator = 0;
+  decimal = false;
+});
+
+$("#memClear").click(function() {
+	memory = 0;
+});
+
+$("#memRecall").click(function() {
+	if (operator > 0) {
+  	operandB = memory;
+    document.getElementById("display").innerHTML = operandB;
+  } else {
+  	operandA = memory;
+    document.getElementById("display").innerHTML = operandA;
+  }	
+});
+
+$("#1").click(function() {		
+	updateDisplay(1);
+});
+
+$("#2").click(function() {
+	updateDisplay(2);
+});
+
+$("#3").click(function() {
+	updateDisplay(3);
+});
+
+$("#4").click(function() {
+	updateDisplay(4);
+});
+
+$("#5").click(function() {
+	updateDisplay(5);
+});
+
+$("#6").click(function() {
+	updateDisplay(6);
+});
+
+$("#7").click(function() {
+	updateDisplay(7);
+});
+
+$("#8").click(function() {
+	updateDisplay(8);
+});
+
+$("#9").click(function() {
+	updateDisplay(9);
+});
+
+$("#0").click(function() {
+	updateDisplay(0);
+});
+
+$("#decimal").click(function() {
+	if (!decimal) {  
+  	decimal = true;
+  } else {
+  	document.getElementById("display").innerHTML = "C'mon, now";
+    operandA = 0;
+    operandB = 0;
+    operator = 0; 
+    decimal = false;
+  }
+});
+
+$("#add").click(function() {
+	calculate();  
+  operator = 1;
+});
+
+$("#subtract").click(function() {
+	calculate();  
+  operator = 2;
+});
+
+$("#multiply").click(function() {
+	calculate();	  
+  operator = 3;
+});
+
+$("#divide").click(function() {
+	calculate();	  
+  operator = 4;
+});
+
+$("#eval").click(function() {
+	calculate(); 
+  operandA = 0;
+  operator = 0; 
+  decimal = false;
+});
+</script>
+</body>
