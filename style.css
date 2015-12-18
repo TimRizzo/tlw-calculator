@@ -1,0 +1,122 @@
+@import url(https://fonts.googleapis.com/css?family=Raleway:400,200);
+
+body {
+  height: 100%;
+  overflow: auto;
+  margin: 0;
+  background: url('http://www.thelittlewaves.com/pomodoro/background.png') no-repeat center center fixed;
+  background-color: #222;
+  -webkit-overflow-scrolling: touch;
+  opacity: .6;
+}
+
+#wrapper {
+	margin: 0;
+  	width: 100%;
+}
+
+.content {  	
+  	margin: 0 auto;
+  	padding: 10px;
+  	font-size: 20px;  	
+  	font-weight: 400;
+  	font-family: 'Raleway', Verdana, sans-serif;
+  	color: #222;
+}
+
+#calc-body {
+	  margin: 0 auto;
+	  max-width: 400px;
+	  height: 400px;	
+    background: #5c5c8a;
+	  display: block;
+	  position: relative;
+  	border: 5px solid #7575a3;  	
+  	-moz-border-radius: 15px;
+  	-webkit-border-radius: 15px;
+  	border-radius: 15px;
+}
+
+#calc-head {	
+	display: block;
+	text-align: center;	
+  color: #DDD;
+  font-weight: 700;
+	font-size: 20px;
+	margin: 5px;	
+}
+
+#display {	
+	display: block;
+	background: #b3d9ff;
+	text-align: right;
+	opacity: .7;
+	margin: 5px;
+	padding: 5px;
+  	-moz-border-radius: 5px;
+  	-webkit-border-radius: 5px;
+	border-radius: 5px;
+}
+
+#calc-keypad {	
+	margin: 5px;
+	padding: 5px;
+	display: block;
+	background: #CCC;	
+	font-size: 30px;	
+  	-moz-border-radius: 5px;
+  	-webkit-border-radius: 5px;
+  	border-radius: 5px;
+}
+
+#calc-row {
+	width: 100%;	
+	display: block;
+}
+
+
+.keyname {
+	width: 18%;
+	margin: 5px;
+	padding: 5px;
+	display: inline-block;
+	text-align: center;
+	color: #BBB;
+	background: #264c73;
+	-moz-border-radius: 15px;
+  -webkit-border-radius: 15px;
+  border-radius: 15px;
+  box-shadow: 2px 2px 2px #3399ff, 3px 3px 4px #000;
+	opacity: .7;
+}
+
+.keyname:hover {
+  background: #666c73;
+}
+
+.keyname:active {
+  background: #666c73;
+  box-shadow: 2px 2px 2px #333;
+}
+
+
+@media only screen and (min-width: 720px) and (max-width: 1039px) {
+
+}
+
+@media only screen and (max-width: 719px) { 
+  #calc-body {	 
+  max-width: 300px;
+  height: 300px;
+  }
+  
+  #calc-keypad {	
+  	font-size: 20px;
+  	padding: 3px;
+  	margin: 3px;
+  }
+
+  .keyname {
+    width: 16%;    
+  }
+}
